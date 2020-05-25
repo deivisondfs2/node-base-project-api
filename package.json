@@ -1,0 +1,90 @@
+{
+  "name": "jest-project",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./dist/server.js",
+    "transpile": "babel . --out-dir dist/ --ignore ./node_modules",
+    "clean": "rimraf dist",
+    "build": "npm-run-all clean transpile",
+    "postbuild": "shx cp -R package.json dist",
+    "dev": "NODE_ENV=development npm-run-all build start",
+    "prod": "NODE_ENV=production npm-run-all build start",
+    "watch:dev": "nodemon",
+    "cleanup:testresults": "rimraf TestResults",
+    "eslint": "eslint .",
+    "pretest": "npm run cleanup:testresults && npm run eslint",
+    "jest": "jest",
+    "test": "npm run jest"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "morgan": "~1.9.1",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "./TestResults/coverage",
+    "reporters": [
+      "default",
+      [
+        "jest-junit",
+        {
+          "outputDirectory": "TestResults",
+          "outputName": "testresults.xml"
+        }
+      ]
+    ],
+    "coverageReporters": [
+      "text",
+      "html",
+      "cobertura"
+    ],
+    "coveragePathIgnorePatterns": [
+      "node_modules",
+      "dist"
+    ]
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.13.1",
+    "eslint-plugin-prettier": "^3.1.3",
+    "jest": "^26.0.1",
+    "jest-junit": "^10.0.0",
+    "prettier": "^2.0.5",
+    "shx": "^0.3.2",
+    "nodemon": "^2.0.4"
+  }
+}
