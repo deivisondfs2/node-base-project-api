@@ -11,9 +11,7 @@ class User extends Model {
       {
         sequelize,
         tableName: 'users',
-        underscored: true,
-        freezeTableName: true,
-        hasTrigger: true
+        underscored: true
       }
     );
 

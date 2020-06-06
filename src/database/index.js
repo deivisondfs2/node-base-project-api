@@ -11,9 +11,11 @@ class DataBase {
   }
 
   init() {
-    this.connect = new Sequelize(configDataBase);
+    this.connect = new Sequelize(configDataBase[process.env.NODE_ENV]);
 
-    this.models.map((model) => model.init(this.connect));
+    this.models
+      .map((model) => model.init(this.connect))
+      .map((model) => model.associate && model.associate(this.connect.models));
   }
 }
 

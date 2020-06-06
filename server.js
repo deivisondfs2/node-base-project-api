@@ -3,6 +3,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
+import 'dotenv/config';
 
 import debug from 'debug';
 import app from './src/app';
