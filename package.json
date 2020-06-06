@@ -14,7 +14,7 @@
     "watch:dev": "nodemon",
     "cleanup:testresults": "rimraf TestResults",
     "eslint": "eslint .",
-    "pretest": "NODE_ENV=test npm run cleanup:testresults && npm run eslint && sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:migrate --env test",
+    "pretest": "NODE_ENV=test npm run cleanup:testresults && npm run eslint && sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test",
     "jest": "NODE_ENV=test jest",
     "test": "NODE_ENV=test npm run jest",
     "posttest": "NODE_ENV=test && sequelize db:migrate:undo:all --env test"
